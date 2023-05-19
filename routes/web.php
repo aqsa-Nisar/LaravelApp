@@ -1,4 +1,5 @@
 <?php
+use App\Models\Author;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,22 +12,10 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-  return $router->app->version();
-});
 
-$router->group(['prefix' => 'api'], function () use ($router) {
-  $router->post('/authors/{author_id}/posts', ['uses' => 'AuthorController@createBook']);
+Route::get('/authors/{id}', function (Author $id) {
+  return $id->posts;
 
-  $router->get('authors/{id}', ['uses' => 'AuthorController@showOneAuthor']);
 
-  $router->post('authors', ['uses' => 'AuthorController@create']);
 
-  $router->delete('authors/{id}', ['uses' => 'AuthorController@delete']);
-
-  $router->put('authors/{id}', ['uses' => 'AuthorController@update']);
-  // Find Posts
-  $router->get('/post', ['uses' => 'AuthorController@showAllBooks']);
-  $router->get('/authors/{author_id}/posts', ['uses' => 'AuthorController@showAllBooksFromAuthor']);
-  $router->get('/authors/{author_id}/books/{book_id}', ['uses' => 'AuthorController@showOneBook']);
 });
