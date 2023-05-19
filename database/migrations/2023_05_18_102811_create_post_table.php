@@ -24,11 +24,6 @@ class CreatePostTable extends Migration
             $table->timestamps();
 
 
-
-
-
-
-
         });
     }
 
