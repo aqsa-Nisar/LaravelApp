@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\AuthorController;
 use App\Models\Author;
 
 /*
@@ -15,6 +16,7 @@ use App\Models\Author;
 
 Route::get('/authors/{id}', function (Author $id) {
   return $id->posts;
+  Route::post('authors', [AuthorController::class, 'store']);
 
 
 

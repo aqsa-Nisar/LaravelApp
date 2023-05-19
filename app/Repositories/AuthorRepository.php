@@ -12,6 +12,11 @@ class AuthorRepository implements AuthorRepositoryInterface
     {
         return Author::findOrFail($id);
     }
+    public function createAuthor(array $authorDetails) 
+    {
+        return Author::create($authorDetails);
+    }
+
 
     
    
