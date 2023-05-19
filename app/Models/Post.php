@@ -13,10 +13,14 @@ class Post extends Model
      *
      * @var array
      */
+    protected $table = "post";
+
     protected $fillable = [
+        "author_id",
+
+        'title',
         'postbody',
-        'slug',
-        'title'
+        'slug'
     ];
     public function post(): BelongsTo
     {

@@ -2,20 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Author;
+use App\Interfaces\AuthorRepositoryInterface;
 
-use App\Models\Post;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
+    private AuthorRepositoryInterface $authorRepository;
 
-    public function create(Request $request)
+    public function __construct(AuthorRepositoryInterface $authorRepository)
     {
-        $author = Author::create($request->all());
+        $this->authorRepository = $authorRepository;
+    }
+    public function createAuthor(Request $request)
+    {
+
+        $author = $this->authorRepository->createAuthor($request->all());
 
         return response()->json($author, 201);
 
+
+    }
+    public function GetPostByauthor($authorId)
+    {
+        $author = $this->authorRepository->getAllPostsOfAuthor($authorId);
+
+        return response()->json($author, 201);
 
     }
 }
