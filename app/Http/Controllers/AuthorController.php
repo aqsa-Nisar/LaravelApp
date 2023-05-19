@@ -23,7 +23,7 @@ class AuthorController extends Controller
     public function showAllPostsFromAuthor($author_id)
     {
         $author = Author::find($author_id);
-        $posts = $author->books;
+        $posts = $author->posts;
         return response()->json($posts, 200);
     }
     public function showOnePost($author_id, $post_id)
