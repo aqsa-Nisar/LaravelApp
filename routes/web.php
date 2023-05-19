@@ -1,23 +1,28 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Models\User;
-
-
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Here is where you can register all of the routes for an application.
+| It is a breeze. Simply tell Lumen the URIs it should respond to
+| and give it the Closure to call when that URI is requested.
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+$router->get('/', function () use ($router) {
+    return $router->app->version();
 });
-Route::get('/users/{user}', function (User $user) {
-    return $user->email;
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+  $$router->post('/authors/{author_id}/posts', ['uses' => 'AuthorController@createBook']);
+
+  $router->get('authors/{id}', ['uses' => 'AuthorController@showOneAuthor']);
+
+  $router->post('authors', ['uses' => 'AuthorController@create']);
+
+  $router->delete('authors/{id}', ['uses' => 'AuthorController@delete']);
+
+  $router->put('authors/{id}', ['uses' => 'AuthorController@update']);
 });
